@@ -183,7 +183,6 @@ func (oc *OAuthConsumer) oAuthRequest(url string, p Params, at *AccessToken, met
 
 	headers["Content-Type"] = "application/x-www-form-urlencoded"
 	// return POSTs response
-	fmt.Println("BODY", p.Encode())
 	if p != nil {
 		return post(url, headers, strings.NewReader(p.Encode()))
 	}
