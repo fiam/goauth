@@ -21,17 +21,17 @@ func base64encode(src []byte) string {
 
 // Encode percent-encodes a string as defined in RFC 3986.
 func Encode(s string) string {
-	var enc string
+	var buf bytes.Buffer
 	for _, c := range []byte(s) {
 		if isEncodable(c) {
-			enc += "%"
-			enc += string("0123456789ABCDEF"[c>>4])
-			enc += string("0123456789ABCDEF"[c&15])
+			buf.WriteByte('%')
+			buf.WriteByte("0123456789ABCDEF"[c>>4])
+			buf.WriteByte("0123456789ABCDEF"[c&15])
 		} else {
-			enc += string(c)
+			buf.WriteByte(c)
 		}
 	}
-	return enc
+	return buf.String()
 }
 
 // isEncodable returns true if a given character should be percent-encoded
